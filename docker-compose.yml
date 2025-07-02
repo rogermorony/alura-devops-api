@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .  # Constrói a imagem a partir do Dockerfile na raiz do projeto
+    container_name: api  # Nome do container
+    ports:
+      - "8000:8000"  # Mapeia a porta 8000 do host para a porta 8000 do container
+    volumes:
+      - .:/app  # Monta o diretório atual (onde está seu código) em /app dentro do container
+    environment:
+      - PYTHONUNBUFFERED=1  # Garante que os logs do Python apareçam imediatamente
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
